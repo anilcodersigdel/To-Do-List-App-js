@@ -17,7 +17,8 @@ const addTodo = () => {
   if (addBtn.value === "Edit") {
     editTodo.target.previousElementSibling.innerHTML = inputText;
     addBtn.value = "Add";
-    addBtn.innerText = "Add";
+    
+    // addBtn.innerText = "Add";
     inputBox.value = "";
     editTodo = null; // Reset editTodo after editing
   } else {
@@ -55,7 +56,7 @@ const updateTodo = (e) => {
     inputBox.value = e.target.previousElementSibling.innerHTML;
     inputBox.focus();
     addBtn.value = "Edit";
-    addBtn.innerText = "Edit";   
+    // addBtn.innerText = "Edit";   
     editTodo = e;
   }
 };
