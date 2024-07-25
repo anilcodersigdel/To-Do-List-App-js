@@ -1,0 +1,91 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .input-container{
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+        padding: 30px;
+
+        input{
+            border: none;
+            outline: none;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 12px 0;
+            font-size: 16px;
+
+           &[type="text"]{
+               width: 70%;
+           }
+        }
+        button{
+            border: none;
+            padding: 10px 13px;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #3da33d;
+            color: white;
+            cursor: pointer;
+            margin-left: 8px;
+            font-weight: 600;
+
+            &:hover{
+                background-color: #60b160;
+            }
+        }
+
+    }
+
+    ul{
+        width: 100%;
+        max-width: 450px;
+        // display: flex;
+        // flex-direction: column;
+        // justify-content: center;
+        // align-items: center;
+
+        li{
+            list-style-type: none;
+            cursor: pointer;
+            border: 1px solid rgb(168, 159, 159);
+            border-radius: 8px;
+            margin-top: 10px;
+            padding: 6px 12px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &:hover{
+                background-color: rgb(245, 239, 239);
+            }
+
+            p{
+                flex-grow: 1;
+            }
+
+            .btn{
+                border: none;
+                outline: none;
+                font-size: 16px;
+                background: none;
+                font-weight: 600;
+                cursor: pointer;
+                margin: 0 5px;
+                padding: 6px;
+                border-radius: 4px;
+
+                &.deleteBtn{
+                    color: #ff0000;
+                }
+                &.editBtn{
+                    color: rgb(17, 192, 17);
+                }
+            }
+        }
+    }
+}
