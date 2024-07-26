@@ -2,8 +2,12 @@ const inputBox = document.getElementById("inputBox");
 const addBtn = document.getElementById("addBtn");
 const todoList = document.getElementById("todoList");
 
+
+
 let editTodo = null;
 
+
+// Function To add To do 
 const addTodo = () => {
   // alert('Hello World!')
 
@@ -11,6 +15,7 @@ const addTodo = () => {
 
   if (inputText.length <= 0) {
     alert("you must write something");
+
     return false;
   }
 
@@ -20,25 +25,25 @@ const addTodo = () => {
     
     // addBtn.innerText = "Add";
     inputBox.value = "";
-    editTodo = null; // Reset editTodo after editing
+    editTodo = null; 
   } else {
+
     // Creating p tag
     const li = document.createElement("li");
     const p = document.createElement("p");
     p.innerHTML = inputText;
     li.appendChild(p);
 
+
     // Creating edit Btn
     const editBtn = document.createElement("button");
     editBtn.innerText = "Edit";
-    // create a edit Btn class
     editBtn.classList.add("btn", "editBtn");
     li.appendChild(editBtn);
 
     // Creating delete btn
     const deleteBtn = document.createElement("button");
     deleteBtn.innerText = "Remove";
-    // create a delete Btn class
     deleteBtn.classList.add("btn", "deleteBtn");
     li.appendChild(deleteBtn);
 
@@ -47,6 +52,8 @@ const addTodo = () => {
   }
 };
 
+
+// Function to Update: edit/delete to do
 const updateTodo = (e) => {
   if (e.target.innerHTML === "Remove") {
     todoList.removeChild(e.target.parentElement);
