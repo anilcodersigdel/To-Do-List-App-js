@@ -63,6 +63,7 @@ const updateTodo = (e) => {
     inputBox.value = e.target.previousElementSibling.innerHTML;
     inputBox.focus();
     addBtn.value = "Edit";
+    
     // addBtn.innerText = "Edit";   
     editTodo = e;
   }

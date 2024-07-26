@@ -31,21 +31,21 @@ body {
   font-size: 16px;
 }
 .container .input-container input[type=text] {
-  width: 70%;
+  width: 80%;
 }
 .container .input-container #addBtn {
   border: none;
-  padding: 10px 13px;
+  padding: 10px 17px;
   border-radius: 4px;
   font-size: 16px;
-  background-color: #3da33d;
+  background-color: #070302;
   color: white;
   cursor: pointer;
   margin-left: 8px;
   font-weight: 600;
 }
 .container .input-container #addBtn:hover {
-  background-color: #60b160;
+  background-color: #6d6e6d;
 }
 .container ul {
   width: 100%;
