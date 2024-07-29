@@ -2,12 +2,9 @@ const inputBox = document.getElementById("inputBox");
 const addBtn = document.getElementById("addBtn");
 const todoList = document.getElementById("todoList");
 
-
-
 let editTodo = null;
 
-
-// Function To add To do 
+// Function To add To do
 const addTodo = () => {
   // alert('Hello World!')
 
@@ -22,18 +19,16 @@ const addTodo = () => {
   if (addBtn.value === "Edit") {
     editTodo.target.previousElementSibling.innerHTML = inputText;
     addBtn.value = "Add";
-    
+
     // addBtn.innerText = "Add";
     inputBox.value = "";
-    editTodo = null; 
+    editTodo = null;
   } else {
-
     // Creating p tag
     const li = document.createElement("li");
     const p = document.createElement("p");
     p.innerHTML = inputText;
     li.appendChild(p);
-
 
     // Creating edit Btn
     const editBtn = document.createElement("button");
@@ -52,7 +47,6 @@ const addTodo = () => {
   }
 };
 
-
 // Function to Update: edit/delete to do
 const updateTodo = (e) => {
   if (e.target.innerHTML === "Remove") {
@@ -63,11 +57,15 @@ const updateTodo = (e) => {
     inputBox.value = e.target.previousElementSibling.innerHTML;
     inputBox.focus();
     addBtn.value = "Edit";
-    
-    // addBtn.innerText = "Edit";   
+
+    // addBtn.innerText = "Edit";
     editTodo = e;
   }
 };
 
 addBtn.addEventListener("click", addTodo);
 todoList.addEventListener("click", updateTodo);
+
+
+
+
