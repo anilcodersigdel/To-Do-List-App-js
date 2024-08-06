@@ -19,7 +19,7 @@ const loadTodosFromLocalStorage = () => {
 
 // Function to render todos from the array
 const renderTodos = () => {
-  todoList.innerHTML = ''; // Clear existing items
+  todoList.innerHTML = '';                                   // Clear existing items
   todos.forEach((todo, index) => {
     const li = document.createElement("li");
 
@@ -32,21 +32,21 @@ const renderTodos = () => {
     li.appendChild(checkbox);
 
     // Creating p tag
-    const p = document.createElement("p");
-    p.innerHTML = todo.text;
-    p.style.textDecoration = todo.checked ? "line-through" : "none";
-    li.appendChild(p);
+    const paragraph = document.createElement("p");
+    paragraph.innerHTML = todo.text;
+    paragraph.style.textDecoration = todo.checked ? "line-through" : "none";
+    li.appendChild(paragraph);
 
     // Creating edit Btn with icon
     const editBtn = document.createElement("button");
-    editBtn.innerHTML = '<i class="fas fa-edit"></i>'; // Font Awesome edit icon
+    editBtn.innerHTML = '<i class="fas fa-edit"></i>';                       // Font Awesome edit icon
     editBtn.classList.add("btn", "editBtn");
     editBtn.addEventListener("click", () => handleEdit(index));
     li.appendChild(editBtn);
 
     // Creating delete btn with icon
     const deleteBtn = document.createElement("button");
-    deleteBtn.innerHTML = '<i class="fas fa-trash"></i>'; // Font Awesome delete icon
+    deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';                   // Font Awesome delete icon
     deleteBtn.classList.add("btn", "deleteBtn");
     deleteBtn.addEventListener("click", () => handleDelete(index));
     li.appendChild(deleteBtn);
@@ -57,6 +57,9 @@ const renderTodos = () => {
 
 // Function to add todo
 const addTodo = () => {
+
+  console.log('button clicked sucessfully');
+
   const inputText = inputBox.value.trim();
 
   if (inputText.length <= 0) {
@@ -67,7 +70,7 @@ const addTodo = () => {
   if (editTodoIndex !== null) {
     // Update existing todo
     todos[editTodoIndex].text = inputText;
-    todos[editTodoIndex].checked = todos[editTodoIndex].checked; // Preserve the checked state
+    todos[editTodoIndex].checked = todos[editTodoIndex].checked;            // Preserve the checked state
     editTodoIndex = null;
     addBtn.innerText = "Add";
   } else {
@@ -103,6 +106,5 @@ const handleDelete = (index) => {
 };
 
 // Initialize the todo list from local storage
-loadTodosFromLocalStorage();
-
+loadTodosFromLocalStorage();+
 addBtn.addEventListener("click", addTodo);
