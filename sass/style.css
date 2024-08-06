@@ -28,7 +28,7 @@ body {
   padding: 12px;
   border-radius: 4px;
   margin: 12px 0;
-  font-size: 16px;
+  font-size: 18px;
 }
 .container .input-container input[type=text] {
   width: 80%;
@@ -69,6 +69,11 @@ body {
 .container ul li p {
   width: 70%;
 }
+.container ul li .checkbox {
+  width: 20px;
+  height: 20px;
+  accent-color: rgb(44, 44, 161);
+}
 .container ul li .btn {
   border: none;
   outline: none;
@@ -83,8 +88,10 @@ body {
 .container ul li .btn.deleteBtn {
   color: #ff0000;
   cursor: pointer;
+  font-size: 23px;
 }
 .container ul li .btn.editBtn {
   color: rgb(17, 192, 17);
   cursor: pointer;
+  font-size: 23px;
 }/*# sourceMappingURL=style.css.map */

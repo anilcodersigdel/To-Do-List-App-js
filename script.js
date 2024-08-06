@@ -2,8 +2,8 @@ const inputBox = document.getElementById("inputBox");
 const addBtn = document.getElementById("addBtn");
 const todoList = document.getElementById("todoList");
 
-let editTodoIndex = null; // Store the index of the todo item being edited
-let todos = []; // Array to store todo items
+let editTodoIndex = null;                // Store the index of the todo item being edited
+let todos = [];                         // Array to store todo items
 
 // Function to save todos to local storage
 const saveTodosToLocalStorage = () => {
@@ -106,5 +106,5 @@ const handleDelete = (index) => {
 };
 
 // Initialize the todo list from local storage
-loadTodosFromLocalStorage();+
+loadTodosFromLocalStorage();
 addBtn.addEventListener("click", addTodo);

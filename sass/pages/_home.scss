@@ -17,7 +17,7 @@
             padding: 12px;
             border-radius: 4px;
             margin: 12px 0;
-            font-size: 16px;
+            font-size: 18px;
 
            &[type="text"]{
                width: 80%;
@@ -67,7 +67,13 @@
                 // flex-grow: 1;
                 width: 70%;
             }
-    
+
+            .checkbox {
+                width: 20px; 
+                height: 20px; 
+                accent-color: rgb(44, 44, 161); 
+            }
+            
 
             // style of both edit and Remove button 
             .btn{
@@ -84,10 +90,12 @@
                 &.deleteBtn{
                     color: #ff0000;
                     cursor: pointer;
+                    font-size: 23px;
                 }
                 &.editBtn{
                     color: rgb(17, 192, 17);
                     cursor: pointer;
+                    font-size: 23px;
                 }
             }
         }
