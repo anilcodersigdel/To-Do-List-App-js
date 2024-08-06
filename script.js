@@ -4,28 +4,31 @@ const todoList = document.getElementById("todoList");
 
 let editTodo = null;
 
-// Function To add To do
+// Function to add todo
 const addTodo = () => {
-  // alert('Hello World!')
-
   const inputText = inputBox.value.trim();
 
   if (inputText.length <= 0) {
-    alert("you must write something");
-
+    alert("You must write something");
     return false;
   }
 
   if (addBtn.value === "Edit") {
     editTodo.target.previousElementSibling.innerHTML = inputText;
     addBtn.value = "Add";
-
-    // addBtn.innerText = "Add";
     inputBox.value = "";
     editTodo = null;
   } else {
-    // Creating p tag
+    // Creating li tag
     const li = document.createElement("li");
+
+    // Creating checkbox
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.classList.add("checkbox");
+    li.appendChild(checkbox);
+
+    // Creating p tag
     const p = document.createElement("p");
     p.innerHTML = inputText;
     li.appendChild(p);
@@ -47,25 +50,25 @@ const addTodo = () => {
   }
 };
 
-// Function to Update: edit/delete to do
+// Function to update: edit/delete todo
 const updateTodo = (e) => {
-  if (e.target.innerHTML === "Remove") {
+  if (e.target.classList.contains("deleteBtn")) {
     todoList.removeChild(e.target.parentElement);
   }
 
-  if (e.target.innerHTML === "Edit") {
-    inputBox.value = e.target.previousElementSibling.innerHTML;
+  if (e.target.classList.contains("editBtn")) {
+    inputBox.value = e.target.previousElementSibling.previousElementSibling.innerHTML; // Adjust to get the p tag content
     inputBox.focus();
     addBtn.value = "Edit";
-
-    // addBtn.innerText = "Edit";
     editTodo = e;
+  }
+
+  // Optionally handle checkbox state change
+  if (e.target.classList.contains("checkbox")) {
+    const isChecked = e.target.checked;
+    e.target.nextElementSibling.style.textDecoration = isChecked ? "line-through" : "none";
   }
 };
 
 addBtn.addEventListener("click", addTodo);
 todoList.addEventListener("click", updateTodo);
-
-
-
-
