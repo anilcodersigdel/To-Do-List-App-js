@@ -82,7 +82,9 @@ body {
 }
 .container ul li .btn.deleteBtn {
   color: #ff0000;
+  cursor: pointer;
 }
 .container ul li .btn.editBtn {
   color: rgb(17, 192, 17);
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */

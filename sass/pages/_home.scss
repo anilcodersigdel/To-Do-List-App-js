@@ -85,9 +85,11 @@
 
                 &.deleteBtn{
                     color: #ff0000;
+                    cursor: pointer;
                 }
                 &.editBtn{
                     color: rgb(17, 192, 17);
+                    cursor: pointer;
                 }
             }
         }

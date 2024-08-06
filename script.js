@@ -2,27 +2,25 @@ const inputBox = document.getElementById("inputBox");
 const addBtn = document.getElementById("addBtn");
 const todoList = document.getElementById("todoList");
 
-let editTodo = null;
+let editTodoIndex = null; // Store the index of the todo item being edited
+let todos = []; // Array to store todo items
 
 // Function to save todos to local storage
 const saveTodosToLocalStorage = () => {
-  const todos = [];
-  const listItems = todoList.querySelectorAll("li");
-
-  listItems.forEach(item => {
-    const checkbox = item.querySelector(".checkbox").checked;
-    const text = item.querySelector("p").innerText;
-    todos.push({ text, checked: checkbox });
-  });
-
   localStorage.setItem("todos", JSON.stringify(todos));
 };
 
 // Function to load todos from local storage
 const loadTodosFromLocalStorage = () => {
-  const todos = JSON.parse(localStorage.getItem("todos")) || [];
-  todos.forEach(todo => {
-    // Creating li tag
+  const storedTodos = JSON.parse(localStorage.getItem("todos")) || [];
+  todos = storedTodos;
+  renderTodos();
+};
+
+// Function to render todos from the array
+const renderTodos = () => {
+  todoList.innerHTML = ''; // Clear existing items
+  todos.forEach((todo, index) => {
     const li = document.createElement("li");
 
     // Creating checkbox
@@ -30,24 +28,27 @@ const loadTodosFromLocalStorage = () => {
     checkbox.type = "checkbox";
     checkbox.classList.add("checkbox");
     checkbox.checked = todo.checked;
+    checkbox.addEventListener("change", () => handleCheckboxChange(index));
     li.appendChild(checkbox);
 
     // Creating p tag
     const p = document.createElement("p");
     p.innerHTML = todo.text;
-    p.style.textDecoration = todo.checked ? "line-through" : "none"; // Apply line-through if checked
+    p.style.textDecoration = todo.checked ? "line-through" : "none";
     li.appendChild(p);
 
-    // Creating edit Btn
+    // Creating edit Btn with icon
     const editBtn = document.createElement("button");
-    editBtn.innerText = "Edit";
+    editBtn.innerHTML = '<i class="fas fa-edit"></i>'; // Font Awesome edit icon
     editBtn.classList.add("btn", "editBtn");
+    editBtn.addEventListener("click", () => handleEdit(index));
     li.appendChild(editBtn);
 
-    // Creating delete btn
+    // Creating delete btn with icon
     const deleteBtn = document.createElement("button");
-    deleteBtn.innerText = "Remove";
+    deleteBtn.innerHTML = '<i class="fas fa-trash"></i>'; // Font Awesome delete icon
     deleteBtn.classList.add("btn", "deleteBtn");
+    deleteBtn.addEventListener("click", () => handleDelete(index));
     li.appendChild(deleteBtn);
 
     todoList.appendChild(li);
@@ -60,86 +61,48 @@ const addTodo = () => {
 
   if (inputText.length <= 0) {
     alert("You must write something");
-    return false;
+    return;
   }
 
-  if (addBtn.value === "Edit") {
-    // Find the <p> tag that needs to be updated
-    const pTag = editTodo.target.previousElementSibling; // This assumes the <p> is the sibling before the button
-    pTag.innerHTML = inputText; // Update the p tag with new text
-    pTag.style.textDecoration = pTag.previousElementSibling.checked ? "line-through" : "none"; // Adjust line-through based on checkbox state
-    addBtn.value = "Add"; // Reset button text to "Add"
-    inputBox.value = ""; // Clear input box
-    editTodo = null; // Reset editTodo reference
-
-    // Save the updated list to local storage
-    saveTodosToLocalStorage();
+  if (editTodoIndex !== null) {
+    // Update existing todo
+    todos[editTodoIndex].text = inputText;
+    todos[editTodoIndex].checked = todos[editTodoIndex].checked; // Preserve the checked state
+    editTodoIndex = null;
+    addBtn.innerText = "Add";
   } else {
-    // Creating li tag
-    const li = document.createElement("li");
-
-    // Creating checkbox
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.classList.add("checkbox");
-    li.appendChild(checkbox);
-
-    // Creating p tag
-    const p = document.createElement("p");
-    p.innerHTML = inputText;
-    li.appendChild(p);
-
-    // Creating edit Btn
-    const editBtn = document.createElement("button");
-    editBtn.innerText = "Edit";
-    editBtn.classList.add("btn", "editBtn");
-    li.appendChild(editBtn);
-
-    // Creating delete btn
-    const deleteBtn = document.createElement("button");
-    deleteBtn.innerText = "Remove";
-    deleteBtn.classList.add("btn", "deleteBtn");
-    li.appendChild(deleteBtn);
-
-    // Append the new item to the end of the list
-    todoList.appendChild(li);
-    inputBox.value = "";
-
-    // Save the updated list to local storage
-    saveTodosToLocalStorage();
+    // Add new todo
+    todos.push({ text: inputText, checked: false });
   }
+
+  inputBox.value = "";
+  saveTodosToLocalStorage();
+  renderTodos();
 };
 
-// Function to update: edit/delete todo
-const updateTodo = (e) => {
-  if (e.target.classList.contains("deleteBtn")) {
-    todoList.removeChild(e.target.parentElement);
+// Function to handle checkbox change
+const handleCheckboxChange = (index) => {
+  todos[index].checked = !todos[index].checked;
+  saveTodosToLocalStorage();
+  renderTodos();
+};
 
-    // Save the updated list to local storage
-    saveTodosToLocalStorage();
-  }
+// Function to handle edit
+const handleEdit = (index) => {
+  inputBox.value = todos[index].text;
+  inputBox.focus();
+  addBtn.innerText = "Edit";
+  editTodoIndex = index;
+};
 
-  if (e.target.classList.contains("editBtn")) {
-    const pTag = e.target.previousElementSibling; // Access the p tag directly
-    inputBox.value = pTag.innerHTML; // Set input box value to the current p tag text
-    inputBox.focus();
-    addBtn.value = "Edit"; // Change button text to "Edit"
-    editTodo = e; // Store the edit event for updating
-  }
-
-  // Handle checkbox state change
-  if (e.target.classList.contains("checkbox")) {
-    const pTag = e.target.nextElementSibling; // Get the p tag after the checkbox
-    const isChecked = e.target.checked;
-    pTag.style.textDecoration = isChecked ? "line-through" : "none"; // Apply or remove line-through
-
-    // Save the updated list to local storage
-    saveTodosToLocalStorage();
-  }
+// Function to handle delete
+const handleDelete = (index) => {
+  todos.splice(index, 1);
+  saveTodosToLocalStorage();
+  renderTodos();
 };
 
 // Initialize the todo list from local storage
 loadTodosFromLocalStorage();
 
 addBtn.addEventListener("click", addTodo);
-todoList.addEventListener("click", updateTodo);
