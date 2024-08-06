@@ -67,7 +67,7 @@ body {
   background-color: rgb(245, 239, 239);
 }
 .container ul li p {
-  flex-grow: 1;
+  width: 50%;
 }
 .container ul li .btn {
   border: none;
